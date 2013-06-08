@@ -1,0 +1,7 @@
+{
+	"providers": [
+		"Rtablada\PackageInstaller\PackageInstallerServiceProvider"
+	],
+	"aliases": [
+	]
+}
