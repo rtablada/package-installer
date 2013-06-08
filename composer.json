@@ -1,6 +1,10 @@
 {
     "name": "rtablada/package-installer",
-    "description": "",
+    "description": "An easy to use package installer for Laravel 4",
+    "keywords": [
+        "laravel"
+    ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Ryan Tablada",
