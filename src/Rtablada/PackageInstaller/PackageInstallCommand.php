@@ -49,7 +49,7 @@ class PackageInstallCommand extends Command {
 	{
 		$packageName = $this->argument('packageName');
 		// Calls composer require
-		// $this->call('package:require', compact('packageName'));
+		$this->call('package:require', compact('packageName'));
 
 		$path = $this->getPackagePath($packageName);
 		$provider = $this->providerCreator->buildProviderFromJsonFile($path);
