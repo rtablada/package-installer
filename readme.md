@@ -1,56 +1,38 @@
-To Do
-===
+Laravel 4 Package Installer
+===========================
 
+This package allows for quick and easy installation of supported Laravel 4 packages.
+This packages installs packages and adds any necessary ServiceProviders and Aliases.
 
-Commands
-		1. $this->updateServiceProviders($package->serviceProviders)
-			1. $contents = $this->getConfigContents()
-			2. $configProviders = $this->config->get('app.providers');
-			3. foreach($providers as $provider) $configProviders . "\n\t\t" . $provider
-			4. $this->contentsCache = str_replace($this->laravel['config']['app.key'], $key, $contents);
-		2. $this->updateAliases($package->aliases)
-			1. $contents = $this->getConfigContents()
-			2. $configProviders = $this->config->get('app.alias');
-			3. foreach($providers as $provider) $configProviders . "\n\t\t" . $provider
-			4. $contents = str_replace($this->laravel['config']['app.key'], $key, $contents);
-		3. $this->getConfigContents()
-			1. if(!isset($this->contentsCache)) $this->contentsCache = $this->file->get($this->configPath)
-			2. return $this->contentsCache
-		4. $this->putConfigFile()
-			1. $this->file->put($this->configPath, $this->getConfigContents())
-		5. $this->configPath = app_path().'/config/app.php'
+## Installing Package Installer
 
+This package installer is available through packagist and composer.
 
+Add `"rtablada/package-installer": "dev-master"` to your `composer.json` or run `composer require rtablada/package-installer`.
 
+Then you have to add `"Rtablada\PackageInstaller\PackageInstallerServiceProvider"` to your list of providers in your `app/config/app.php`. Luckily, this will be one of the last package Aliases you will ever have to add manually!
 
-Plan of Attack
-===
+## Using this installer
 
-Commands
-- Package:require
-	1. passthru("composer require {$packageName}")
-- Package:install
-	1. $this->call('package:require', array('name' => $packageName))
-	2. $path = $this->getPackagePath()
-		1. // Parse $packageName for segments
-		2. // $package $packageSegments[1] to studly case from '-' delimited
-		3. $vendor = ucwords($packageSegments[0])
-		4. $path = base_path() . "vendor/{$packageSegment[0]}/{$packageSegment}/provides.json"
-	3. $provider = $this->builder->newInstanceFromJsonFile($path)
-	4. $this->installer->updateConfigurations($package)
-		1. $this->updateServiceProviders($package->serviceProviders)
-			1. $contents = $this->getConfigContents()
-			2. $configProviders = $this->config->get('app.providers');
-			3. foreach($providers as $provider) $configProviders . "\n\t\t" . $provider
-			4. $this->contentsCache = str_replace($this->laravel['config']['app.key'], $key, $contents);
-		2. $this->updateAliases($package->aliases)
-			1. $contents = $this->getConfigContents()
-			2. $configProviders = $this->config->get('app.alias');
-			3. foreach($providers as $provider) $configProviders . "\n\t\t" . $provider
-			4. $contents = str_replace($this->laravel['config']['app.key'], $key, $contents);
-		3. $this->getConfigContents()
-			1. if(!isset($this->contentsCache)) $this->contentsCache = $this->file->get($this->configPath)
-			2. return $this->contentsCache
-		4. $this->putConfigFile()
-			1. $this->file->put($this->configPath, $this->getConfigContents())
-		5. $this->configPath = app_path().'/config/app.php'
+This package allows for supported packages to be installed by running `php artisan package:install vendor/name`.
+For instance, to install [Traffic Signs](https://github.com/rtablada/traffic-signs)(a simple error page handler) you can run `php artisan package:install rtablada/traffic-signs`.
+
+## Developing packages for Laravel 4 Package Installer
+
+To allow your package to be installed by Laravel 4 Package Installer, just add a `provides.json` to the root of your package.
+
+The format for `provides.json` looks like this:
+
+```json
+{
+  "providers": [
+    "Illuminate\Html\HtmlServiceProvider"
+  ],
+  "aliases": [
+    {
+      "alias": "HTML",
+      "facade": "Illuminate\Support\Facades\HTML"
+    }
+  ]
+}
+```
