@@ -10,7 +10,7 @@ class Provider
 	 *
 	 * @var array
 	 */
-	public $serviceProviders = array();
+	public $providers = array();
 
 	/**
 	 * Array of Aliases provided by the package
@@ -32,8 +32,8 @@ class Provider
 
 	public function setObjectValues($obj)
 	{
-		$this->serviceProviders = $obj->serviceProviders;
-		$this->aliases = $obj->serviceProviders;
+		$this->providers = $obj->providers;
+		$this->aliases = $obj->aliases;
 	}
 
 	/**
@@ -43,6 +43,7 @@ class Provider
 	 */
 	public function buildFromJson($string)
 	{
+		$string = str_replace('\\', '\\\\', $string);
 		$obj = json_decode($string);
 
 		return new static($obj);
