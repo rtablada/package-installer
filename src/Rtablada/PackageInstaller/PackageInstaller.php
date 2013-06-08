@@ -87,14 +87,20 @@ class PackageInstaller
 
 	protected function getNewConfigContents($key, array $array)
 	{
-		$header = "'{$key}' => ";
-		$values = var_export($array, true);
-		$content = $header . $values . ",\n\n\t";
-		$content = str_replace('(', "(\n\t", $content);
-		$content = str_replace(')', "\n\t)", $content);
-		$content = str_replace("\n  ", "\n\t\t", $content);
+		if (isset($array[0])) {
+			$header = "'{$key}' => array(\n\n\t\t'";
+			$values = implode("',\n\t\t'", $array);
+			$content = $header . $values . "',\n\n\t),";
+		} else {
+			$header = "'{$key}' => ";
+			$values = var_export($array, true);
+			$content = $header . $values . ",";
+			$content = str_replace('(', "(\n\t", $content);
+			$content = str_replace(')', "\n\t)", $content);
+			$content = str_replace("\n  ", "\n\t\t", $content);
+		}
 
-		return trim($content);
+		return $content;
 	}
 
 	protected function getConfigContents()
