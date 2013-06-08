@@ -10,14 +10,14 @@ class Provider
 	 *
 	 * @var array
 	 */
-	protected $serviceProviders = array();
+	public $serviceProviders = array();
 
 	/**
 	 * Array of Aliases provided by the package
 	 *
 	 * @var array
 	 */
-	protected $aliases = array();
+	public $aliases = array();
 
 	/**
 	 * Create a new Provider Instance

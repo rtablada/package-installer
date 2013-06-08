@@ -1,6 +1,6 @@
-<?php
+<?php namespace Rtablada\PackageInstaller;
 
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Filesystem\Filesystem as File;
 
 class ProviderCreator
 {
@@ -30,7 +30,11 @@ class ProviderCreator
 	 */
 	public function buildProviderFromJsonFile($path)
 	{
-		$contents = $this->file->get($path);
-		return $this->provider->buildFromJson($contents);
+		if ($this->file->exists($path)) {
+			$contents = $this->file->get($path);
+			return $this->provider->buildFromJson($contents);
+		}
+
+		return null;
 	}
 }

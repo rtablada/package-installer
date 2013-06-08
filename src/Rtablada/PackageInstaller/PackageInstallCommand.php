@@ -21,14 +21,22 @@ class PackageInstallCommand extends Command {
 	protected $description = 'Installs a package and sets configuration.';
 
 	/**
+	 * The ProviderCreator instance
+	 *
+	 * @var ProviderCreator
+	 */
+	protected $providerCreator;
+
+	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(ProviderCreator $providerCreator)
 	{
 		parent::__construct();
 
+		$this->providerCreator = $providerCreator;
 	}
 
 	/**
@@ -40,13 +48,24 @@ class PackageInstallCommand extends Command {
 	{
 		$packageName = $this->argument('packageName');
 		// Calls composer require
-		$this->call('package:require', compact('packageName'));
+		// $this->call('package:require', compact('packageName'));
 
 		$path = $this->getPackagePath($packageName);
+		$provider = $this->providerCreator->buildProviderFromJsonFile($path);
 
-		var_dump($path); die();
+		if (is_null($provider)) {
+			return $this->comment('This package has no provides.json file.');
+		}
+
+		var_dump($provider); die();
 	}
 
+	/**
+	 * Returns path to provides.json for installed package
+	 *
+	 * @param  string $packageName
+	 * @return string
+	 */
 	protected function getPackagePath($packageName)
 	{
 		return base_path() . "/vendor/{$packageName}/provides.json";
