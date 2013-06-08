@@ -32,11 +32,12 @@ class PackageInstallCommand extends Command {
 	 *
 	 * @return void
 	 */
-	public function __construct(ProviderCreator $providerCreator)
+	public function __construct(ProviderCreator $providerCreator, PackageInstaller $installer)
 	{
 		parent::__construct();
 
 		$this->providerCreator = $providerCreator;
+		$this->installer = $installer;
 	}
 
 	/**
@@ -57,7 +58,7 @@ class PackageInstallCommand extends Command {
 			return $this->comment('This package has no provides.json file.');
 		}
 
-		var_dump($provider); die();
+		$this->installer->updateConfigurations($provider);
 	}
 
 	/**
