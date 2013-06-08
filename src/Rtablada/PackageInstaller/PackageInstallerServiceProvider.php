@@ -18,7 +18,30 @@ class PackageInstallerServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->registerInstall();
+		$this->registerRequire();
+		$this->registerCommands();
+	}
+
+	protected function registerInstall()
+	{
+		$this->app['package.install'] = $this->app->share(function($app)
+        {
+        	return new PackageInstallCommand;
+        });
+	}
+
+	protected function registerRequire()
+	{
+		$this->app['package.require'] = $this->app->share(function($app)
+        {
+            return new PackageRequireCommand;
+        });
+	}
+
+	protected function registerCommands()
+	{
+		$this->commands('package.install', 'package.require');
 	}
 
 	/**

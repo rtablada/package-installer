@@ -1,4 +1,4 @@
-<?php
+<?php namespace Rtablada\PackageInstaller;
 
 /**
  * Provider Wrapper For Package Provider
