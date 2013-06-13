@@ -81,7 +81,7 @@ class PackageInstaller
 	protected function replaceConfig($key, array $array)
 	{
 		$replace = $this->getNewConfigContents($key, $array);
-		$pattern = "/'{$key}' => array\([^)]*\),/s";
+		$pattern = "/'{$key}' => array\([^)]*\)/s";
 		$this->contentsCache = preg_replace($pattern, $replace, $this->contentsCache);
 	}
 
@@ -90,11 +90,11 @@ class PackageInstaller
 		if (isset($array[0])) {
 			$header = "'{$key}' => array(\n\n\t\t'";
 			$values = implode("',\n\t\t'", $array);
-			$content = $header . $values . "',\n\n\t),";
+			$content = $header . $values . "',\n\n\t)";
 		} else {
 			$header = "'{$key}' => ";
 			$values = var_export($array, true);
-			$content = $header . $values . ",";
+			$content = $header . $values;
 			$content = str_replace('(', "(\n\t", $content);
 			$content = str_replace(')', "\n\t)", $content);
 			$content = str_replace("\n  ", "\n\t\t", $content);
