@@ -32,8 +32,11 @@ class Provider
 
 	public function setObjectValues($obj)
 	{
-		$this->providers = $obj->providers;
-		$this->aliases = $obj->aliases;
+		if(isset($obj->providers))
+			$this->providers = $obj->providers;
+
+		if(isset($obj->aliases))
+			$this->aliases = $obj->aliases;
 	}
 
 	/**
