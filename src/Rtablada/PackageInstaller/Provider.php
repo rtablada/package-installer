@@ -46,7 +46,6 @@ class Provider
 	 */
 	public function buildFromJson($string)
 	{
-		// $string = str_replace('\\', '\\\\', $string);
 		$obj = json_decode($string);
 
 		return new static($obj);
