@@ -52,6 +52,7 @@ class PackageInstaller
 		$this->getConfigContents();
 		$configProviders = $this->config->get('app.providers');
 		$configProviders = array_merge($configProviders, $providers);
+		$configProviders = array_unique($configProviders);
 		$this->replaceConfig('providers', $configProviders);
 	}
 
@@ -61,6 +62,7 @@ class PackageInstaller
 		$this->getConfigContents();
 		$configAliases = $this->config->get('app.aliases');
 		$configAliases = array_merge($configAliases, $aliases);
+		$configAliases = array_unique($configAliases);
 		$this->replaceConfig('aliases', $configAliases);
 	}
 
