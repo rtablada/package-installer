@@ -32,8 +32,7 @@ class ProviderCreator
 	{
 		if ($this->file->exists($path)) {
 			$contents = $this->file->get($path);
-			// preg_replace('/(\w)\\(\w)/', '$1\\\\$2', $contents);
-			die($contents);
+			preg_replace("~(\w)\\\(\w)~", "$1\\\\\\\\$2", $contents);
 			return $this->provider->buildFromJson($contents);
 		}
 
