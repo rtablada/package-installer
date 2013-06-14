@@ -32,10 +32,20 @@ class ProviderCreator
 	{
 		if ($this->file->exists($path)) {
 			$contents = $this->file->get($path);
-			preg_replace("~(\w)\\\(\w)~", "$1\\\\\\\\$2", $contents);
+			$contents = createValidJsonWithSlashes($contents);
 			return $this->provider->buildFromJson($contents);
 		}
 
 		return null;
+	}
+
+	/**
+	 * Replaces single slash with dual slash for valid JSON
+	 * @param  string $string
+	 * @return string
+	 */
+	protected function createValidJsonWithSlashes($string)
+	{
+		return preg_replace("~(\w)\\\(\w)~", "$1\\\\\\\\$2", $string);
 	}
 }
