@@ -32,7 +32,7 @@ class ProviderCreator
 	{
 		if ($this->file->exists($path)) {
 			$contents = $this->file->get($path);
-			$contents = createValidJsonWithSlashes($contents);
+			$contents = $this->createValidJsonWithSlashes($contents);
 			return $this->provider->buildFromJson($contents);
 		}
 
