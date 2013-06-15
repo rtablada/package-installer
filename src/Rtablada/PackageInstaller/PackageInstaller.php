@@ -100,6 +100,7 @@ class PackageInstaller
 			$content = str_replace('(', "(\n\t", $content);
 			$content = str_replace(')', "\n\t)", $content);
 			$content = str_replace("\n  ", "\n\t\t", $content);
+			$content = str_replace("array (", "array(", $content);
 		}
 
 		return $content;
