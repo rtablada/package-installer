@@ -36,3 +36,5 @@ The format for `provides.json` looks like this:
   ]
 }
 ```
+
+** Note that either valid JSON or invalid JSON can be written to add to the readability of the `provides.json` this is to increase human readability while allowing developers to write whichever way they prefer.
