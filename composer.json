@@ -1,11 +1,4 @@
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/rtablada/packagist-api.git"
-        }
-    ],
-
     "name": "rtablada/package-installer",
     "description": "An easy to use package installer for Laravel 4",
     "keywords": [
