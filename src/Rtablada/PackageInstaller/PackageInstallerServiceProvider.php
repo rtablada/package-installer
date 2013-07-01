@@ -20,6 +20,7 @@ class PackageInstallerServiceProvider extends ServiceProvider {
 	{
 		$this->registerInstall();
 		$this->registerRequire();
+		$this->registerSearch();
 		$this->registerCommands();
 	}
 
@@ -41,9 +42,17 @@ class PackageInstallerServiceProvider extends ServiceProvider {
         });
 	}
 
+	protected function registerSearch()
+	{
+		$this->app['package.search'] = $this->app->share(function($app)
+        {
+            return new PackageSearchCommand(new \Packagist\Api\Client);
+        });
+	}
+
 	protected function registerCommands()
 	{
-		$this->commands('package.install', 'package.require');
+		$this->commands('package.install', 'package.require', 'package.search');
 	}
 
 	/**
