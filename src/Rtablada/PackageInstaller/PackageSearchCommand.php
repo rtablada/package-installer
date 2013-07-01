@@ -63,10 +63,14 @@ class PackageSearchCommand extends Command {
 		);
 		$results = $this->packagist->search($query, $filters);
 
+		$table = $this->getHelperSet()->get('table');
+		$table->setHeaders(array('Package Name', 'Package Description'));
+		$rows = array();
+
 		foreach ($results as $result) {
-			$printOut = "{$result->getName()}\t{$result->getDescription()}";
-			$this->info($printOut);
+			$rows[] = array($result->getName(), $result->getDescription());
 		}
+		$table->setRows($rows)->render($this->getOutput());
 	}
 
 	/**
