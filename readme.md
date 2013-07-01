@@ -1,6 +1,8 @@
 Laravel 4 Package Installer
 ===========================
 
+[![Build Status](https://travis-ci.org/rtablada/package-installer.png?branch=master)](http://travis-ci.org/rtablada/package-installer)
+
 This package allows for quick and easy installation of supported Laravel 4 packages.
 This packages installs packages and adds any necessary ServiceProviders and Aliases.
 
