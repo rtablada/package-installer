@@ -16,7 +16,8 @@
         "illuminate/support": "4.0.x",
         "illuminate/console": "4.0.x",
         "illuminate/filesystem": "4.0.x",
-        "illuminate/config": "4.0.x"
+        "illuminate/config": "4.0.x",
+        "knplabs/packagist-api": "0.1.*@dev"
     },
     "autoload": {
         "psr-0": {
