@@ -4,6 +4,8 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
+use Packagist\Api\Client as Packagist;
+
 class PackageSearchCommand extends Command {
 
 	/**
@@ -11,23 +13,30 @@ class PackageSearchCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'command:name';
+	protected $name = 'package:search';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description.';
+	protected $description = 'Searches for LPM Packages.';
+
+	/**
+	 * Instance of the Packagist API
+	 * @var Packagist\Api\Client
+	 */
+	protected $packagist;
 
 	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Packagist $packagist)
 	{
 		parent::__construct();
+		$this->packagist = $packagist;
 	}
 
 	/**
@@ -37,7 +46,27 @@ class PackageSearchCommand extends Command {
 	 */
 	public function fire()
 	{
-		//
+		$query = $this->argument('query');
+
+		$this->searchForPackages($query);
+	}
+
+	/**
+	 * Searches Packagist API for LPM Packages
+	 * @param  string $query
+	 * @return
+	 */
+	protected function searchForPackages($query)
+	{
+		$filters = array(
+			'tags' => 'lpm'
+		);
+		$results = $this->packagist->search($query, $filters);
+
+		foreach ($results as $result) {
+			$printOut = "{$result->getName()}\t{$result->getDescription()}";
+			$this->info($printOut);
+		}
 	}
 
 	/**
@@ -48,19 +77,7 @@ class PackageSearchCommand extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('example', InputArgument::REQUIRED, 'An example argument.'),
-		);
-	}
-
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return array(
-			array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
+			array('query', InputArgument::REQUIRED, 'String to search for.'),
 		);
 	}
 

@@ -19,6 +19,9 @@
         "illuminate/config": "4.0.x",
         "knplabs/packagist-api": "0.1.*@dev"
     },
+    "require-dev": {
+        "mockery/mockery": "0.8.*"
+    },
     "autoload": {
         "psr-0": {
             "Rtablada\\PackageInstaller": "src/"
