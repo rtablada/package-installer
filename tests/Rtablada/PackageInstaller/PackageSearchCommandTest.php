@@ -12,7 +12,7 @@ class PackageSearchCommandTest extends \PHPUnit_Framework_Testcase
 
 		$tester = new CommandTester(new PackageSearchCommand(new \Packagist\Api\Client));
 
-		$tester->execute(array('query' => 'rtablada');
+		$tester->execute(array('query' => 'rtablada'));
 
 		$this->assertContains('rtablada', $tester->getDisplay());
 	}
