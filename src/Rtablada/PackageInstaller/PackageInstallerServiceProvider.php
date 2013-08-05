@@ -28,8 +28,8 @@ class PackageInstallerServiceProvider extends ServiceProvider {
 	{
 		$this->app['package.install'] = $this->app->share(function($app)
         {
-        	$providerCreator = new ProviderCreator($this->app['files'], new Provider);
-        	$packageInstaller = new PackageInstaller($this->app['files'], $this->app['config']);
+        	$providerCreator = new ProviderCreator($app['files'], new Provider);
+        	$packageInstaller = new PackageInstaller($app['files'], $app['config']);
         	return new PackageInstallCommand($providerCreator, $packageInstaller);
         });
 	}
