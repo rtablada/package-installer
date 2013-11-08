@@ -13,10 +13,10 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.0.x",
-        "illuminate/console": "4.0.x",
-        "illuminate/filesystem": "4.0.x",
-        "illuminate/config": "4.0.x",
+        "illuminate/support": "~4",
+        "illuminate/console": "~4",
+        "illuminate/filesystem": "~4",
+        "illuminate/config": "~4",
         "knplabs/packagist-api": "dev-master"
     },
     "require-dev": {
