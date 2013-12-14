@@ -17,7 +17,7 @@
         "illuminate/console": "~4",
         "illuminate/filesystem": "~4",
         "illuminate/config": "~4",
-        "knplabs/packagist-api": "dev-master"
+        "knplabs/packagist-api": "v1.1"
     },
     "require-dev": {
         "mockery/mockery": "0.8.*"
@@ -27,5 +27,5 @@
             "Rtablada\\PackageInstaller": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
